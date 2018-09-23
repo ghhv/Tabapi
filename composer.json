@@ -10,7 +10,7 @@
     "autoload": {
         "psr-0" : {
             "mrgla55\\Tabapi" : "src"
-        }
+        },
         "files": [
             "src/helpers.php"
         ]
