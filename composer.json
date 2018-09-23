@@ -1,0 +1,42 @@
+{
+    "name": "mrgla55/tabapi",
+    "description": "API Wrapper for the TAB",
+    "authors": [
+        {
+            "name": "John Hewitt",
+            "email": "john.hewitt@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-0" : {
+            "mrgla55\\Tabapi" : "src"
+        }
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "minimum-stability": "dev",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/mrgla55/Tabapi"
+		}
+	],
+	"prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        },
+        "laravel": {
+            "providers": [
+                "mrgla55\\Tabapi\\ServiceProvider"
+            ],
+            "aliases": {
+                "Tabapi": "mrgla55\\Tabapi\\Facade"
+            }
+        }
+    },
+    "require-dev": {
+        "laravel/framework": "5.5.x"
+    }
+}
