@@ -1,19 +1,19 @@
 {
     "name": "mrgla55/tabapi",
     "description": "API Wrapper for the TAB",
+    "license":"MIT",
+    "keywords":["tab", "laravel", "rest", "api", "racing"],
     "authors": [
         {
             "name": "John Hewitt",
-            "email": "john.hewitt@outlook.com"
+            "email": "john.hewitt@outlook.com",
+            "role": "Developer"
         }
     ],
     "autoload": {
-        "psr-0" : {
-            "mrgla55\\Tabapi" : "src"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        "psr-4": {
+            "Mrgla55\\Tabapi\\": "src/Mrgla55/Tabapi/"
+        }
     },
     "minimum-stability": "dev",
 	"repositories": [
@@ -35,6 +35,15 @@
                 "Tabapi": "mrgla55\\Tabapi\\Facade"
             }
         }
+    },
+    "require": {
+        "php": ">=5.6",
+        "illuminate/cache" : ">5",
+        "illuminate/contracts" : ">5",
+        "illuminate/config": ">5",
+        "illuminate/http" : ">5",
+        "illuminate/routing" : ">5",
+        "guzzlehttp/guzzle": ">6.0"
     },
     "require-dev": {
         "laravel/framework": "5.5.x"
