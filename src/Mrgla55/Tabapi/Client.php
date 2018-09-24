@@ -348,7 +348,7 @@ class Client
     public function resources($options = [])
     {
         $url = $this->getBaseUrl();
-        $resources = $this->request($url, $options);
+        $resources = $this->request($url, $options)['_links'];
 
         return $resources;
     }
@@ -664,14 +664,35 @@ class Client
      */
     public function __call($name, $arguments)
     {
+		$name = str_replace('_', ':', $name);
+		
         $url = $this->instanceURLRepo->get();
-        $url .= $this->resourceRepo->get($name);
-        $url .= $this->appendURL($arguments);
-
+        $url .= strtok($this->resourceRepo->get($name), '?');
+        //$url .= $this->appendURL($arguments);
+		
+		$url = $this->setArguments($url, $arguments);
+		
         $options = $this->setOptions($arguments);
-
+		
         return $this->request($url, $options);
     }
+	
+	private function setArguments($url, $arguments)
+	{
+        if (!isset($arguments[0])) return $url;
+        if (!is_array($arguments[0])) return $url;
+		
+		foreach ($arguments[0] as $key => $value)
+		{
+			if (strpos($url, '{' . $key . '}') !== false)
+			{
+				$url = str_replace('{' . $key . '}', $value, $url);
+				unset($arguments[0][$key]);
+			}
+		}
+		
+		return $url . '?' . http_build_query($arguments[0]);
+	}
 
     private function appendURL($arguments) {
         if (!isset($arguments[0])) return '';
