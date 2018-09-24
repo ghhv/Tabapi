@@ -1,8 +1,9 @@
 {
     "name": "mrgla55/tabapi",
+    "type": "library",
     "description": "API Wrapper for the TAB",
-    "license":"MIT",
     "keywords":["tab", "laravel", "rest", "api", "racing"],
+    "license":"MIT",
     "authors": [
         {
             "name": "John Hewitt",
@@ -23,7 +24,7 @@
 	],
     "require": {
         "php": ">=5.6",
-        "guzzlehttp/guzzle": ">6.0"
+        "guzzlehttp/guzzle": "6.*"
     },
     "minimum-stability": "dev"
 }

@@ -1,5 +1,5 @@
 # Tabapi
-TAB REST API Client for Laravel 5
+TAB Studio REST API Client for Laravel 5
 
 [![Laravel](https://img.shields.io/badge/Laravel-5.5-orange.svg?style=flat-square)](http://laravel.com)
 [![Latest Stable Version](https://img.shields.io/packagist/v/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
@@ -45,7 +45,7 @@ You will need a configuration file to add your credentials. Publish a config fil
 ```bash
 php artisan vendor:publish
 ```
-You can find the config file in: `config/Tabapi.php`
+You can find the config file in: `config/tabapi.php`
 
 >For Lumen, you should copy the config file from `src/config/config.php` and add it to a `Tabapi.php` configuration file under a config directory in the root of your application. 
 
