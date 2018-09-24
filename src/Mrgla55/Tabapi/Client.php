@@ -6,7 +6,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\ResponseInterface;
 use Mrgla55\Tabapi\Exceptions\InvalidLoginCreditialsException;
-use Mrgla55\Tabapi\Exceptions\SalesforceException;
+use Mrgla55\Tabapi\Exceptions\TabException;
 use Mrgla55\Tabapi\Exceptions\TokenExpiredException;
 use Mrgla55\Tabapi\Exceptions\MissingVersionException;
 
@@ -201,7 +201,7 @@ abstract class Client
 
         $formattedResponse = $this->formatter->formatResponse($response);
 
-        $this->event->fire('forrest.response', [$formattedResponse]);
+        $this->event->fire('tabapi.response', [$formattedResponse]);
 
         return $formattedResponse;
     }
@@ -447,7 +447,7 @@ abstract class Client
     }
 
     /**
-     * Details how Salesforce will process your query.
+     * Details how Tab will process your query.
      * Available for API verison 30.0 or later.
      *
      * @param string $query
@@ -552,7 +552,7 @@ abstract class Client
     }
 
     /**
-     * Returns a list of Salesforce Knowledge articles whose titles match the user’s
+     * Returns a list of Tab Knowledge articles whose titles match the user’s
      * search query. Provides a shortcut to navigate directly to likely
      * relevant articles, before the user performs a search.
      * Available for API version 30.0 or later.
@@ -586,7 +586,7 @@ abstract class Client
 
     /**
      * Returns a list of suggested searches based on the user’s query string text
-     * matching searches that other users have performed in Salesforce Knowledge.
+     * matching searches that other users have performed in Tab Knowledge.
      * Available for API version 30.0 or later.
      *
      * Tested this and can't get it to work. I think the request is set up correctly.
@@ -703,7 +703,7 @@ abstract class Client
     abstract public function refresh();
 
     /**
-     * Revokes access token from Salesforce. Will not flush token from storage.
+     * Revokes access token from Tab. Will not flush token from storage.
      *
      * @return mixed
      */
@@ -780,17 +780,17 @@ abstract class Client
      *
      * @param RequestException $ex
      *
-     * @throws SalesforceException
+     * @throws TabException
      * @throws TokenExpiredException
      */
     private function assignExceptions(RequestException $ex)
     {
         if ($ex->hasResponse() && $ex->getResponse()->getStatusCode() == 401) {
-            throw new TokenExpiredException('Salesforce token has expired', $ex);
+            throw new TokenExpiredException('Tab token has expired', $ex);
         } elseif ($ex->hasResponse()) {
-            throw new SalesforceException('Salesforce response error', $ex);
+            throw new TabException('Tab response error', $ex);
         } else {
-            throw new SalesforceException('Invalid request: %s', $ex);
+            throw new TabException('Invalid request: %s', $ex);
         }
     }
 }
