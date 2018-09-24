@@ -15,7 +15,6 @@
             "Mrgla55\\Tabapi\\": "src/Mrgla55/Tabapi/"
         }
     },
-    "minimum-stability": "dev",
 	"repositories": [
 		{
 			"type": "vcs",
@@ -24,14 +23,7 @@
 	],
     "require": {
         "php": ">=5.6",
-        "illuminate/cache" : ">5",
-        "illuminate/contracts" : ">5",
-        "illuminate/config": ">5",
-        "illuminate/http" : ">5",
-        "illuminate/routing" : ">5",
         "guzzlehttp/guzzle": ">6.0"
     },
-    "require-dev": {
-        "laravel/framework": "5.5.x"
-    }
+    "minimum-stability": "dev"
 }
