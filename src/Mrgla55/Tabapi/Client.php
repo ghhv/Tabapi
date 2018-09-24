@@ -50,7 +50,7 @@ use Mrgla55\Tabapi\Interfaces\ResourceRepositoryInterface;
  *
  * search() and query() are not overloaded with the __call() method, this is because queries require urlencoding. I'm open to a more elegant solution, but prefer to leave it this way to make it simple to use.
  */
-abstract class Client
+class Client
 {
     /**
      * HTTP request client.
@@ -161,6 +161,9 @@ abstract class Client
         $this->formatter        = $formatter;
         $this->settings         = $settings;
         $this->credentials      = $settings['credentials'];
+		
+		$this->storeVersion();
+		$this->storeResources();
     }
 
     /**
@@ -325,16 +328,15 @@ abstract class Client
      */
     public function versions($options = [])
     {
-        $url = $this->instanceURLRepo->get();
-        $url .= '/services/data';
+        $url = 'https://api.beta.tab.com.au/';
 
-        $versions = $this->request($url, $options);
+        $versions = $this->request($url, $options)['versions'];
 
         return $versions;
     }
 
     /**
-     * Lists availabe resources for specified API version.
+     * Lists available resources for specified API version.
      * Includes resource name and URI.
      * Formats: json, xml
      * Methods: get.
@@ -700,19 +702,19 @@ abstract class Client
      *
      * @return mixed $response
      */
-    abstract public function refresh();
+    //abstract public function refresh();
 
     /**
      * Revokes access token from Tab. Will not flush token from storage.
      *
      * @return mixed
      */
-    abstract public function revoke();
+    //abstract public function revoke();
 
     protected function getBaseUrl()
     {
         $url = $this->instanceURLRepo->get();
-        $url .= $this->versionRepo->get()['url'];
+        $url .= $this->versionRepo->get();
 
         return $url;
     }

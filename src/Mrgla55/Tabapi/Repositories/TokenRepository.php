@@ -38,11 +38,18 @@ class TokenRepository implements RepositoryInterface {
      */
     public function get()
     {
-        $this->verify();
+        //$this->verify();
 
-        $token = $this->storage->get('token');
+		if ($this->storage->has('token'))
+		{			
+			$token = $this->storage->get('token');
 
-        return $this->encryptor->decrypt($token);
+			return $this->encryptor->decrypt($token);
+		}
+		else
+		{
+			return null;
+		}
     }
 
     public function has() {

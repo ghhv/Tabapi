@@ -4,8 +4,7 @@ namespace Mrgla55\Tabapi\Providers;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
-use Mrgla55\Tabapi\Authentications\WebServer;
-use Mrgla55\Tabapi\Authentications\UserPassword;
+use Mrgla55\Tabapi\Client as TabapiClient;
 use Mrgla55\Tabapi\Providers\Laravel\LaravelCache;
 use Mrgla55\Tabapi\Providers\Laravel\LaravelEvent;
 use Mrgla55\Tabapi\Providers\Laravel\LaravelEncryptor;
@@ -81,7 +80,6 @@ abstract class BaseServiceProvider extends ServiceProvider
             // Config options
             $settings           = config('tabapi');
             $storageType        = config('tabapi.storage.type');
-            $authenticationType = config('tabapi.authentication');
 
             // Dependencies
             $httpClient    = $this->getClient();
@@ -100,26 +98,42 @@ abstract class BaseServiceProvider extends ServiceProvider
 
             $formatter = new JSONFormatter($tokenRepo, $settings);
 
-            switch ($authenticationType) {
-                default:
-                    $tabapi = new WebServer(
-                        $httpClient,
-                        $encryptor,
-                        $event,
-                        $input,
-                        $redirect,
-                        $instanceURLRepo,
-                        $refreshTokenRepo,
-                        $resourceRepo,
-                        $stateRepo,
-                        $tokenRepo,
-                        $versionRepo,
-                        $formatter,
-                        $settings);
-                    break;
-            }
-
+			$tabapi = new TabapiClient(
+				$httpClient,
+				$encryptor,
+				$event,
+				$input,
+				$redirect,
+				$instanceURLRepo,
+				$refreshTokenRepo,
+				$resourceRepo,
+				$stateRepo,
+				$tokenRepo,
+				$versionRepo,
+				$formatter,
+				$settings);			
+			
             return $tabapi;
         });
+    }
+	/**
+     * @param  String $tokenURL
+     * @param  Array $parameters
+     * @return String
+     */
+    private function getAuthToken($url)
+    {
+        $parameters['form_params'] = [
+            'grant_type'    => 'password',
+            'client_id'     => $this->credentials['consumerKey'],
+            'client_secret' => $this->credentials['consumerSecret'],
+            'username'      => $this->credentials['username'],
+            'password'      => $this->credentials['password'],
+        ];
+        // \Psr\Http\Message\ResponseInterface
+        $response = $this->httpClient->request('post', $url, $parameters);
+        $authTokenDecoded = json_decode($response->getBody(), true);
+        $this->handleAuthenticationErrors($authTokenDecoded);
+        return $authTokenDecoded;
     }
 }
