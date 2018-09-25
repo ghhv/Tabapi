@@ -1,7 +1,7 @@
 {
     "name": "mrgla55/tabapi",
     "type": "library",
-    "description": "API Wrapper for the TAB",
+    "description": "An API Wrapper for the TAB Studio",
     "keywords":["tab", "laravel", "rest", "api", "racing"],
     "license":"MIT",
     "authors": [

@@ -101,5 +101,16 @@ or
 Tabapi::info_sports(['jurisdiction' => 'nsw']);;
 ```
 
+## Custom Apex endpoints
+For nested links or to call direct, you can use the custom() method for consuming them.
+
+Tabapi::custom('/myEndpoint');
+Additional options and parameters can be passed in like this:
+
+Tabapi::custom('/myEndpoint', [
+    'method' => 'post',
+    'body' => ['foo' => 'bar'],
+    'parameters' => ['flim' => 'flam']]);
+Read Creating REST APIs using Apex REST for more information.
 
 For more information about Guzzle responses and event listeners, refer to their [documentation](http://guzzle.readthedocs.org).
