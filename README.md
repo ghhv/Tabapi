@@ -2,7 +2,6 @@
 TAB Studio REST API Client for Laravel 5
 
 [![Laravel](https://img.shields.io/badge/Laravel-5.5-orange.svg?style=flat-square)](http://laravel.com)
-[![Latest Stable Version](https://img.shields.io/packagist/vpre/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
 [![Latest Stable Version](https://img.shields.io/packagist/v/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
 [![Total Downloads](https://img.shields.io/packagist/dt/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
 [![License](https://img.shields.io/packagist/l/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
@@ -105,13 +104,16 @@ Tabapi::info_sports(['jurisdiction' => 'nsw']);;
 ## Custom Apex endpoints
 For nested links or to call direct, you can use the custom() method for consuming them.
 
+```php
 Tabapi::custom('/myEndpoint');
+```
 Additional options and parameters can be passed in like this:
 
-Tabapi::custom('/myEndpoint', [
-    'method' => 'post',
-    'body' => ['foo' => 'bar'],
-    'parameters' => ['flim' => 'flam']]);
+```php
+Tabapi::custom('https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/2018-11-06/meetings/R/Racing%20-%20Futures/races/Melbourne%20Cup%20(All%20In)', [
+		'parameters' => ['jurisdiction' => 'VIC', 'fixedOdds' => 'true']
+	]);
+```
 Read Creating REST APIs using Apex REST for more information.
 
 For more information about Guzzle responses and event listeners, refer to their [documentation](http://guzzle.readthedocs.org).
