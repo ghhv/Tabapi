@@ -2,6 +2,7 @@
 TAB Studio REST API Client for Laravel 5
 
 [![Laravel](https://img.shields.io/badge/Laravel-5.5-orange.svg?style=flat-square)](http://laravel.com)
+[![Latest Stable Version](https://img.shields.io/packagist/vpre/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
 [![Latest Stable Version](https://img.shields.io/packagist/v/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
 [![Total Downloads](https://img.shields.io/packagist/dt/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
 [![License](https://img.shields.io/packagist/l/mrgla55/Tabapi.svg?style=flat-square)](https://packagist.org/packages/mrgla55/Tabapi)
