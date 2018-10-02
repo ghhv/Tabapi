@@ -628,7 +628,6 @@ class Client
     public function custom($customURI, $options = [])
     {
         $url = $this->instanceURLRepo->get();
-        $url .= '/services/apexrest';
         $url .= $customURI;
 
         $parameters = [];

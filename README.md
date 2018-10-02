@@ -98,7 +98,7 @@ Tabapi::lookup_countries_allowed();
 ```
 or
 ```php
-Tabapi::info_sports(['jurisdiction' => 'nsw']);;
+Tabapi::info_sports(['jurisdiction' => 'nsw']);
 ```
 
 ## Custom Apex endpoints
